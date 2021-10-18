@@ -1,0 +1,18 @@
+using RBot;
+
+public class Script {
+
+	public void ScriptMain(ScriptInterface bot){
+		bot.Options.SafeTimings = true;
+		
+		bot.Skills.StartSkills("Skills/Generic.xml");
+		
+		while(!bot.ShouldExit()){
+			bot.Quests.Accept(6629);
+			
+            bot.Player.HuntForItem("Icewing Warrior", "Icewing Warrior Defeated", 2, true);
+			
+			bot.Quests.Complete(6629);
+		}
+	}
+}
