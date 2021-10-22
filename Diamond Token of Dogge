@@ -1,0 +1,52 @@
+using RBot;
+
+public class Script {
+
+	public void ScriptMain(ScriptInterface bot){
+		bot.Options.SafeTimings = true;
+		bot.Options.RestPackets = true;
+		bot.Options.InfiniteRange = true;
+		
+		bot.Player.LoadBank();
+		bot.Inventory.BankAllCoinItems();
+		bot.Bank.ToInventory("Defeated Makai");
+		bot.Bank.ToInventory("Diamond Token of Dage");
+		bot.Bank.ToInventory("Legion Token");
+			
+		bot.Skills.StartTimer();
+        
+        while(!bot.ShouldExit()){
+        	if(bot.Map.Name != "Shadowblast")
+        	bot.Player.Join("Shadowblast");
+        	bot.Player.Jump("Enter", "Right");
+        	
+        	bot.Quests.EnsureAccept(4743);           
+            bot.Player.Join("citadel-1e9", "Enter", "Spawn");
+            bot.Sleep(500);
+            bot.Player.Jump("m22", "Spawn");
+            bot.Player.Join("tercessuinotlim-1e9", "Enter", "Spawn");
+            bot.Sleep(500);
+            bot.Player.HuntForItem("Dark Makai", "Defeated Makai", 25, false, true);
+            bot.Player.Jump("blank", "spawn");
+
+            bot.Player.Join("dflesson-1e9", "r12", "Right");
+            bot.Player.KillForItem("Fluffy The Dracolich", "Fluffy's Bones", 1, true, true);
+
+            bot.Player.Join("aqlesson-1e9", "Frame9", "Right");
+            bot.Player.KillForItem("Carnax", "Carnax Eye", 1, true, true);
+
+            bot.Player.Join("deepchaos-1e9", "Frame4", "Left");
+            bot.Player.KillForItem("Kathool", "Kathool Tentacle", 1, true, true);
+
+            bot.Player.Join("lair-1e9", "End", "Left");
+            bot.Player.KillForItem("Red Dragon", "Red Dragon's Fang", 1, true, true);
+  
+            bot.Player.Join("bloodtitan-1e9", "Enter", "Spawn");
+            bot.Player.KillForItem("Blood Titan", "Blood Titan's Blade", 1, true, true);           
+            
+            bot.Quests.EnsureComplete(4743, -1);                    	
+        	bot.Player.Pickup("Diamond Token of Dage");                               	
+        	bot.Player.Pickup("Legion Token");
+        }
+    }
+}
