@@ -1,0 +1,32 @@
+/*
+	Created by LegionRevenantAgreed
+	This script farms for dredrock Rep Rank 10.
+
+	Notes:
+		The script uses a private room.
+*/
+
+using RBot;
+using System.Timers;
+
+public class Script{
+
+	public void ScriptMain(ScriptInterface bot){
+		bot.Skills.StartTimer();
+		bot.Options.SafeTimings = true;
+		bot.Options.RestPackets = true;
+		bot.Options.PrivateRooms = true;
+		bot.Options.ExitCombatBeforeQuest = true;
+		
+		bot.Skills.LoadSkills("./Skills/Generic.xml");
+				
+		while (!bot.ShouldExit()) {
+			bot.Quests.EnsureAccept(4845);
+			bot.Player.Join("dreadrock");
+			bot.SendClientPacket($"%xt%zm%buyItem%21524%33879%1221%20351%"true);
+			bot.Quests.EnsureComplete(4845);
+		}
+		
+		bot.Exit();
+	}
+}
